@@ -17,6 +17,8 @@ def isVideo(videofile):
 		return True
 	if videofile.lower().endswith('.avi'):
 		return True
+	if videofile.lower().endswith('.m4v'):
+		return True
 	return False
 
 newFiles = [os.path.join(dp, f) for dp, dn, filenames in os.walk(directory) for f in filenames if isVideo(f)]
