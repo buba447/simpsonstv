@@ -2,20 +2,27 @@ import RPi.GPIO as GPIO
 import time
 import os
 
-os.system('raspi-gpio set 19 ip')
+
+os.system('raspi-gpio set 13 ip')
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(18, GPIO.OUT)
+os.system('amixer sset "PCM" 0%')
 
 
 def turnOnScreen():
-    os.system('raspi-gpio set 19 op a5')
-    GPIO.output(18, GPIO.HIGH)
+    os.system('raspi-gpio set 13 op a0')
+# power on screen
+    os.system('sudo echo 0 | sudo tee /sys/class/backlight/rpi_backlight/bl_power')
+# change volume to 90%
+    os.system('amixer sset "PCM" 90%')
 
 
 def turnOffScreen():
-    os.system('raspi-gpio set 19 ip')
-    GPIO.output(18, GPIO.LOW)
+    os.system('raspi-gpio set 13 ip')
+# power off screen
+    os.system('sudo echo 1 | sudo tee /sys/class/backlight/rpi_backlight/bl_power')
+# change volume to 0%
+    os.system('amixer sset "PCM" 0%')
 
 
 turnOffScreen()
