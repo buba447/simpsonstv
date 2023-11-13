@@ -24,7 +24,7 @@ def playVideos():
         return
     random.shuffle(videos)
     for video in videos:
-        playProcess = Popen(['omxplayer', '--no-osd', '--aspect-mode', 'fill', video])
+        playProcess = Popen(['cvlc', '--no-osd', '--aspect-mode', 'fill', video])
         playProcess.wait()
 
 
